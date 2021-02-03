@@ -10,8 +10,8 @@ import { compose } from 'redux';
 import { connect } from 'react-redux';
 import Preloader from './common/loading/Preloader';
 
-const ProfileContainer = React.lazy( () => import('./components/Profile/ProfileContainer'));
-const DialogsContainer = React.lazy( () => import('./components/Dialogs/DialogsContainer'));
+const ProfileContainer = React.lazy(() => import('./components/Profile/ProfileContainer'));
+const DialogsContainer = React.lazy(() => import('./components/Dialogs/DialogsContainer'));
 
 class App extends React.Component {
 
@@ -22,7 +22,7 @@ class App extends React.Component {
   render() {
 
     if (!this.props.initialized) {
-      return <Preloader/>
+      return <Preloader />
     }
 
     return (
@@ -32,15 +32,15 @@ class App extends React.Component {
         <div className='app-wrapper-content'>
           <Route path='/dialogs' render={() => {
             return <React.Suspense fallback={<div>Loading...</div>}>
-                <DialogsContainer />
+              <DialogsContainer />
             </React.Suspense>
-          }}/>
+          }} />
 
           <Route path='/profile/:userId?' render={() => {
             return <React.Suspense fallback={<div>Loading...</div>}>
-                <ProfileContainer />
+              <ProfileContainer />
             </React.Suspense>
-          }}/>
+          }} />
 
           <Route path='/users' render={() => <UsersContainer />} />
           <Route path='/login' render={() => <LoginPage />} />
@@ -54,8 +54,8 @@ const mapStateToProps = (state) => ({
   initialized: state.app.initialized
 })
 
-export default compose (
+export default compose(
   withRouter,
-  connect( mapStateToProps, { initializeApp }))(App);
+  connect(mapStateToProps, { initializeApp }))(App);
 
 
